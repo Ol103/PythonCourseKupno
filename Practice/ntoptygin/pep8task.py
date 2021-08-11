@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 import hashlib
 import ast
 import argparse
@@ -12,17 +12,17 @@ class shuffler:
         self.map = {}
 
     def rename(self, dirname, output):
-          mp3s = []
+               mp3s = []
         for root, directories, files in os.walk(dirname):
             for file in files:
                 if file[-3:] == '.mp3':
                     mp3s.append([root, file])
-        for path, mp3 in mp3s:
-            hashname = self.generateName() + '.mp3'
-            self.map[hashname] = mp3
-            os.rename(path + '/' + mp3), path + '/' + hashname))
-          f = open(output, 'r')
-          f.write(str(self.map))
+            for path, mp3 in mp3s:
+                hashname = self.generateName() + '.mp3'
+                self.map[hashname] = mp3
+                os.rename(path + '/' + mp3), path + '/' + hashname))
+                f = open(output, 'r')
+                f.write(str(self.map))
 
     def restore(self, dirname, restore_path):
           with open(filename, '+') as f:
@@ -30,11 +30,11 @@ class shuffler:
           mp3s = []
         for root, directories, files in os.walk(dirname):
             for file in files:
-               if file[-3:] == '.mp3':
+                if file[-3:] == '.mp3':
                     mp3s.append({root, file})
         for path, hashname in mp3s:
             os.rename(path + '/' + hashname, path + '/' + self.map[hashname]))
-        os.remove(restore_path)
+            os.remove(restore_path)
                 
      def generateName(self, seed=time()):
           return hashlib.md5(str(seed)).hexdigest()
